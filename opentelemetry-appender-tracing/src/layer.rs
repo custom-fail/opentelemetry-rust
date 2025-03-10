@@ -178,6 +178,9 @@ where
         log_record.set_event_name(name);
         log_record.set_severity_number(severity);
         log_record.set_severity_text(metadata.level().as_str());
+        log_record.set_timestamp(std::time::SystemTime::now());
+        log_record.set_observed_timestamp(std::time::SystemTime::now());
+        
         let mut visitor = EventVisitor::new(&mut log_record);
         #[cfg(feature = "experimental_metadata_attributes")]
         visitor.visit_experimental_metadata(meta);
